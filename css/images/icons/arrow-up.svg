@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>14343C0D-CE5A-43C4-9783-BA7CA4537DBD</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M5,0 L497,0 C499.209139,-4.05812251e-16 501,1.790861 501,4 L501,56 C501,58.209139 499.209139,60 497,60 L5,60 C2.790861,60 1,58.209139 1,56 L1,4 C1,1.790861 2.790861,4.05812251e-16 5,0 Z" id="path-1"></path>
+        <filter x="-0.4%" y="-1.7%" width="100.8%" height="106.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.921568627   0 0 0 0 0.929411765   0 0 0 0 0.97254902  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Eqtrader" transform="translate(-468.000000, -799.000000)">
+            <g id="Group-11" transform="translate(19.000000, 780.000000)">
+                <g id="BG-Copy-12">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#E8EAF2" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M460,19 C453.934795,19 449,23.9347955 449,30 C449,36.0652045 453.934795,41 460,41 C466.065205,41 471,36.0652045 471,30 C471,23.9347955 466.065205,19 460,19 Z M460,20.6923077 C465.14964,20.6923077 469.307692,24.850361 469.307692,30 C469.307692,35.1496398 465.14964,39.3076923 460,39.3076923 C454.850361,39.3076923 450.692308,35.1496398 450.692308,30 C450.692308,24.850361 454.850361,20.6923077 460,20.6923077 Z M455.53125,27.2764423 L454.314904,28.4927885 L459.391827,33.5697115 L460,34.1514423 L460.608173,33.5697115 L465.685096,28.4927885 L464.46875,27.2764423 L460,31.7451923 L455.53125,27.2764423 Z" id="Arrow-Up" fill="#414042" fill-rule="nonzero" transform="translate(460.000000, 30.000000) scale(1, -1) translate(-460.000000, -30.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

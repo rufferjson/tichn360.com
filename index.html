@@ -1,0 +1,2697 @@
+<html lang="en" style="font-size: 8px;"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>WebTrader</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<style>
+.ps-container {
+  -ms-touch-action: auto;
+  touch-action: auto;
+  overflow: hidden !important;
+  -ms-overflow-style: none; }
+
+@supports (-ms-overflow-style: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+  display: block;
+  background-color: transparent; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container > .ps-scrollbar-x-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  bottom: 0px;
+  height: 15px; }
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  bottom: 2px;
+  height: 6px; }
+
+.ps-container > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x, .ps-container > .ps-scrollbar-x-rail:active > .ps-scrollbar-x {
+  height: 11px; }
+
+.ps-container > .ps-scrollbar-y-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  right: 0;
+  width: 15px; }
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  right: 2px;
+  width: 6px; }
+
+.ps-container > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y, .ps-container > .ps-scrollbar-y-rail:active > .ps-scrollbar-y {
+  width: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container:hover > .ps-scrollbar-x-rail, .ps-container:hover > .ps-scrollbar-y-rail {
+  opacity: .6; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+  background-color: #999; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+  background-color: #999; }
+
+.ps-container {
+  position: relative;
+  display: block; }
+  .ps-container .ps-content {
+    min-height: 100%; }
+  .ps-container[hidden] {
+    display: none; }
+  .ps-container[fxlayout] > .ps-content {
+    display: flex; }
+
+</style><style>
+.ps-container {
+  -ms-touch-action: auto;
+  touch-action: auto;
+  overflow: hidden !important;
+  -ms-overflow-style: none; }
+
+@supports (-ms-overflow-style: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+  display: block;
+  background-color: transparent; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container > .ps-scrollbar-x-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  bottom: 0px;
+  height: 15px; }
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  bottom: 2px;
+  height: 6px; }
+
+.ps-container > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x, .ps-container > .ps-scrollbar-x-rail:active > .ps-scrollbar-x {
+  height: 11px; }
+
+.ps-container > .ps-scrollbar-y-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  right: 0;
+  width: 15px; }
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  right: 2px;
+  width: 6px; }
+
+.ps-container > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y, .ps-container > .ps-scrollbar-y-rail:active > .ps-scrollbar-y {
+  width: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container:hover > .ps-scrollbar-x-rail, .ps-container:hover > .ps-scrollbar-y-rail {
+  opacity: .6; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+  background-color: #999; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+  background-color: #999; }
+
+.ps-container {
+  position: relative;
+  display: block; }
+  .ps-container .ps-content {
+    min-height: 100%; }
+  .ps-container[hidden] {
+    display: none; }
+  .ps-container[fxlayout] > .ps-content {
+    display: flex; }
+
+</style><style>
+.ps-container {
+  -ms-touch-action: auto;
+  touch-action: auto;
+  overflow: hidden !important;
+  -ms-overflow-style: none; }
+
+@supports (-ms-overflow-style: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+  display: block;
+  background-color: transparent; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container > .ps-scrollbar-x-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  bottom: 0px;
+  height: 15px; }
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  bottom: 2px;
+  height: 6px; }
+
+.ps-container > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x, .ps-container > .ps-scrollbar-x-rail:active > .ps-scrollbar-x {
+  height: 11px; }
+
+.ps-container > .ps-scrollbar-y-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  right: 0;
+  width: 15px; }
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  right: 2px;
+  width: 6px; }
+
+.ps-container > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y, .ps-container > .ps-scrollbar-y-rail:active > .ps-scrollbar-y {
+  width: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container:hover > .ps-scrollbar-x-rail, .ps-container:hover > .ps-scrollbar-y-rail {
+  opacity: .6; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+  background-color: #999; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+  background-color: #999; }
+
+.ps-container {
+  position: relative;
+  display: block; }
+  .ps-container .ps-content {
+    min-height: 100%; }
+  .ps-container[hidden] {
+    display: none; }
+  .ps-container[fxlayout] > .ps-content {
+    display: flex; }
+
+</style><style>
+.ps-container {
+  -ms-touch-action: auto;
+  touch-action: auto;
+  overflow: hidden !important;
+  -ms-overflow-style: none; }
+
+@supports (-ms-overflow-style: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ps-container {
+    overflow: auto !important; } }
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+  display: block;
+  background-color: transparent; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container > .ps-scrollbar-x-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  bottom: 0px;
+  height: 15px; }
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  bottom: 2px;
+  height: 6px; }
+
+.ps-container > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x, .ps-container > .ps-scrollbar-x-rail:active > .ps-scrollbar-x {
+  height: 11px; }
+
+.ps-container > .ps-scrollbar-y-rail {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  -o-transition: background-color .2s linear, opacity .2s linear;
+  -moz-transition: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  right: 0;
+  width: 15px; }
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  position: absolute;
+  background-color: #aaa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+  -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+  transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+  right: 2px;
+  width: 6px; }
+
+.ps-container > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y, .ps-container > .ps-scrollbar-y-rail:active > .ps-scrollbar-y {
+  width: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: #999;
+  height: 11px; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: #999;
+  width: 11px; }
+
+.ps-container:hover > .ps-scrollbar-x-rail, .ps-container:hover > .ps-scrollbar-y-rail {
+  opacity: .6; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+  background-color: #999; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: #eee;
+  opacity: .9; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+  background-color: #999; }
+
+.ps-container {
+  position: relative;
+  display: block; }
+  .ps-container .ps-content {
+    min-height: 100%; }
+  .ps-container[hidden] {
+    display: none; }
+  .ps-container[fxlayout] > .ps-content {
+    display: flex; }
+
+</style></head>
+<body style="">
+<div class="main-wrapper-webtrader" id="main-wrapper-webtrader">
+    <panda-forex-init ng-version="4.4.7"><!---->
+</panda-forex-init>
+
+    <div id="header" class="layout-row just-stretch">
+        <div class="layout-column">
+            <panda-forex-logo ng-version="4.4.7"><div class="logo-wrapper layout-row full-height" style="width: 25em;">
+    <img src="./vendor/img/logos/fxpesa-top.svg">
+</div>
+</panda-forex-logo>
+        </div>
+        <div class="layout-column">
+            <panda-forex-lang class="layout-row full-height" ng-version="4.4.7"><div class="mainpandats full-width layout-column centered-content full-width">
+    <custom-select name="language" class="ng-untouched ng-pristine ng-valid"><!----><div class="frx-dropdown-pandats layout-row just-end">
+    <div class="frx-dropbtn-pandats layout-column centered-content full-width">
+        <!----><span class="flag-icon-pandats flag-icon-pandats-en"></span>
+        <!---->
+    </div>
+    <div class="frx-dropdown-content-pandats date-picker-pandats pfdin-text-universal-pandats dropdown-hide-pandats">
+        <perfect-scrollbar class="scroll-container-pandats ps-container ps-theme-default ps-active-y" data-ps-id="335f55df-2607-dbf5-4e18-1810473e6389"><div class="ps-content">
+            <div class="wrap-list-pandats" style="height: 136px;">
+                   <!----><span class="item-pandats active-pandats">
+			<!----><span class="flag-icon-pandats flag-icon-pandats-en"></span>
+			<span class="itemLabel">English</span>
+                   </span><span class="item-pandats">
+			<!----><span class="flag-icon-pandats flag-icon-pandats-sa"></span>
+			<span class="itemLabel">العربية</span>
+                   </span><span class="item-pandats">
+			<!----><span class="flag-icon-pandats flag-icon-pandats-de"></span>
+			<span class="itemLabel">Deutsch</span>
+                   </span><span class="item-pandats">
+			<!----><span class="flag-icon-pandats flag-icon-pandats-fr"></span>
+			<span class="itemLabel">Français</span>
+                   </span><span class="item-pandats">
+			<!----><span class="flag-icon-pandats flag-icon-pandats-cn"></span>
+			<span class="itemLabel">中文</span>
+                   </span>
+            </div>
+        </div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 136px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 114px;"></div></div></perfect-scrollbar>
+    </div>
+</div>
+
+
+<!---->
+</custom-select>
+
+</div>
+</panda-forex-lang>
+        </div>
+        <div class="layout-column">
+            <panda-forex-clock class="layout-row full-height" ng-version="4.4.7"><!----><div class="clock-wrapper-pandats layout-column full-width centered-content pfdin-text-universal-pandats">
+    <div class="current-time-pandats font16-pandats layout-row">18:54:39</div>
+    <custom-select name="timezone" class="ng-untouched ng-pristine ng-valid"><!----><div class="frx-dropdown-pandats layout-row just-end">
+    <div class="frx-dropbtn-pandats layout-column centered-content full-width">
+        <!---->
+        <!----><span class="frx-currentvalue-pandats">
+            GMT +1
+        </span>
+    </div>
+    <div class="frx-dropdown-content-pandats date-picker-pandats pfdin-text-universal-pandats dropdown-hide-pandats">
+        <perfect-scrollbar class="scroll-container-pandats ps-container ps-theme-default ps-active-y" data-ps-id="39750b3c-ba52-db42-3544-decac458cb06"><div class="ps-content">
+            <div class="wrap-list-pandats" style="height: 136px;">
+                   <!----><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -11</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -10</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -9</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -8</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -7</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -6</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -5</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -4</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -3</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -2</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT -1</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT 0</span>
+                   </span><span class="item-pandats active-pandats">
+			<!---->
+			<span class="itemLabel">GMT +1</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +2</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +3</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +4</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +5</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +6</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +7</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +8</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +9</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +10</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +11</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +12</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +13</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">GMT +14</span>
+                   </span>
+            </div>
+        </div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 136px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 22px;"></div></div></perfect-scrollbar>
+    </div>
+</div>
+
+
+<!---->
+</custom-select>
+
+</div>
+</panda-forex-clock>
+        </div>
+        <div class="layout-column">
+            <panda-forex-market-analysis ng-version="4.4.7"><!---->
+</panda-forex-market-analysis>
+        </div>
+        <div class="layout-column shrinkable">
+        </div>
+        <div class="layout-column accountInfo">
+            <panda-forex-account-status ng-version="4.4.7"><!---->
+</panda-forex-account-status>
+        </div>
+        <div class="layout-column centered-content accounts-login-wrapper">
+            <div class="layout-row">
+                <div class="layout-column">
+                    <panda-forex-accounts ng-version="4.4.7"><!---->
+</panda-forex-accounts>
+                </div>
+                <div class="layout-column full-width">
+                    <panda-forex-login show-logout="true" ng-version="4.4.7"><!----><div class="mainpandats logintop helvetica-neue-pandats layout-row full-height just-center">
+    <div class="layout-column centered-content menu-wrapper full-size">
+        <div>
+            <button class="forex-button-pandats simple-button-pandats spinner-button-pandats accent">
+                <!---->
+                Log In
+            </button>
+            <!---->
+        </div>
+
+        <div class="layout-row full-size" hidden="">
+            <custom-select name="login-actions" class="ng-untouched ng-pristine ng-valid"><!----><div class="frx-dropdown-pandats layout-row just-end">
+    <div class="frx-dropbtn-pandats layout-column centered-content full-width">
+        <!---->
+        <!----><span class="frx-currentvalue-pandats">
+            
+        </span>
+    </div>
+    <div class="frx-dropdown-content-pandats date-picker-pandats pfdin-text-universal-pandats dropdown-hide-pandats">
+        <perfect-scrollbar class="scroll-container-pandats ps-container ps-theme-default" data-ps-id="1fd93cdd-08ae-892f-3f6a-85c3d6a2b1b4"><div class="ps-content">
+            <div class="wrap-list-pandats" style="height: auto;">
+                   <!----><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">Deposit</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">Logout</span>
+                   </span>
+            </div>
+        </div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></perfect-scrollbar>
+    </div>
+</div>
+
+
+<!---->
+</custom-select>
+        </div>
+    </div>
+
+</div>
+</panda-forex-login>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="platform">
+        <panda-forex-trading-platform ng-version="4.4.7"><div class="mainpandats">
+
+    <div class="wrapper-pandats helvetica-neue-pandats">
+
+        <spinner><!----></spinner>
+
+        <!---->
+
+        <!----><div class="platform-wrapper-pandats">
+
+            <div class="col-left-pandats cell-pandats">
+                <asset-list class="ng-tns-c2-9"><div class="asset-list-wrapper pfdin-text-universal-pandats">
+    <div class="search-wrapper-pandats">
+        <input class="search-pandats font14-pandats ng-untouched ng-pristine ng-valid" maxlength="10" type="text" placeholder="Search for assets to trade...">
+        <i class="icon-pandats cmicon-search font16-pandats"></i>
+    </div>
+
+    <!---->
+    <perfect-scrollbar class="container-pandats ps-container ps-theme-default ps-active-y" data-ps-id="7c43a0e2-df1d-8b1d-a227-72ab7be44889"><div class="ps-content">
+        <!----><ul class="layout-column ng-tns-c2-9">
+            <!----><li class="layout-row ng-tns-c2-9">
+
+                <div class="layout-column full-width">
+                    <div class="layout-row">
+                        <div class="category-pandats layout-column centered-content">
+                            <div class="layout-row full-width">
+                                <div class="layout-column">
+                                    <i class="icon-pandats cmicon-favorites"></i>
+                                </div>
+
+                                <div class="layout-column name-pandats font18-pandats shrinkable">Favorites</div>
+
+                                <div class="layout-column">
+                                    <i class="icon-pandats icon-action-pandats cmicon-circle-up self-to-end"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="layout-row">
+
+                        <!---->
+                    </div>
+                </div>
+            </li><li class="layout-row ng-tns-c2-9">
+
+                <div class="layout-column full-width">
+                    <div class="layout-row">
+                        <div class="category-pandats layout-column centered-content">
+                            <div class="layout-row full-width">
+                                <div class="layout-column">
+                                    <i class="icon-pandats cmicon-forex"></i>
+                                </div>
+
+                                <div class="layout-column name-pandats font18-pandats shrinkable">Forex</div>
+
+                                <div class="layout-column">
+                                    <i class="icon-pandats icon-action-pandats cmicon-circle-up self-to-end expanded"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----><div class="layout-row ng-tns-c2-9">
+                        <div class="category-titles-pandats layout-column centered-content">
+                            <div class="layout-row full-width">
+                                <div class="font12-pandats">Product Name</div>
+                                <div class="font12-pandats">Bid</div>
+                                <div class="font12-pandats">Ask</div>
+                                <div class="font12-pandats">Change</div>
+                                <div class="font12-pandats">Fav</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layout-row">
+
+                        <!----><ul class="category-assets-pandats layout-column ng-tns-c2-9">
+                            <!----><li class="layout-row ng-tns-c2-9 selected-pandats">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-za"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURZAR</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">20.1118</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">20.1191</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-1.46%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-za"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPZAR</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">23.4910</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">23.5009</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-1.30%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDCHF</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">0.91379</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.91401</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.19%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">AUDUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">0.65322</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.65336</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.23%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.06930</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">1.06946</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.34%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">1.24890</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">1.24915</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.18%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">AUDCHF</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.59693</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.59716</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.41%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">CADCHF</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.66847</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.66873</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.10%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURCHF</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.97721</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.97749</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.15%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURGBP</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.85604</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.85624</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.16%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPCHF</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">1.14136</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">1.14174</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.01%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NZDCHF</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">0.54281</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.54328</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.10%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NZDUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.59412</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.59433</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.10%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">AUDJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">103.040</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">103.066</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.58%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">CADJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">115.390</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">115.416</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.25%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">157.730</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">157.746</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.34%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-chf"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">CHFJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">172.595</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">172.637</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.16%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">168.663</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">168.692</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.00%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">197.015</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">197.051</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.17%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-mx"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">MXNJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats">9.202</div>
+    <div class="price-pandats font15-pandats line-height20-pandats">9.215</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.84%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-bv"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NOKJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">14.220</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">14.446</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.74%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NZDJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">93.714</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">93.744</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.26%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-se"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">SEKJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">14.344</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">14.548</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.80%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-jpy"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">SGDJPY</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">115.774</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">115.808</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">1.12%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURNZD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.79953</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">1.79989</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.23%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDCAD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">1.36682</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.36703</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.09%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPAUD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.91180</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.91231</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.40%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURSGD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.45656</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">1.45691</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.09%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPCAD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.70713</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.70764</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.09%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPNZD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">2.10189</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">2.10241</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.07%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPSGD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">1.70128</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">1.70175</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.06%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NZDCAD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.81205</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.81239</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.01%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NZDSGD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.80926</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.80958</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.14%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">AUDCAD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.89285</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.89310</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.32%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">AUDSGD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.88960</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.89021</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.47%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-nzd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">AUDNZD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.09926</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.09957</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.33%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-aud"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURAUD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">1.63682</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">1.63707</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.55%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">CADSGD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.99624</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">0.99688</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.18%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cad"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURCAD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.46158</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">1.46192</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.24%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-bv"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURNOK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">11.78908</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">11.80413</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.35%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-mx"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURMXN</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">18.30294</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">18.31698</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.81%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-pl"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURPLN</div>
+    <div class="price-pandats font15-pandats line-height20-pandats">4.31751</div>
+    <div class="price-pandats font15-pandats line-height20-pandats">4.32048</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.12%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-se"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">EURSEK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">11.70105</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">11.70942</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.23%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-bv"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPNOK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">13.77042</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">13.78667</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.56%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-gbp"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-se"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">GBPSEK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">13.66794</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">13.67682</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.41%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-bv"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-se"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">NOKSEK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.99115</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">0.99395</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.06%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-cnh"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDCNH</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">7.26718</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">7.26817</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.17%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-mx"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDMXN</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">17.11540</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">17.12770</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.48%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-bv"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDNOK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">11.02441</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">11.03775</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.68%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-pl"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDPLN</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">4.03739</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">4.04024</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.47%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-se"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDSEK</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">10.94115</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">10.94963</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.58%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-sg"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDSGD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">1.36203</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">1.36235</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.23%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-za"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">USDZAR</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">18.80256</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">18.81694</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-1.16%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-xau"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">XAUUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">2,338.51</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">2,338.84</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.26%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-xau"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">XAUEUR</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">2,186.68</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up2-pandats">2,187.27</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats up">0.62%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-xag"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">XAGUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">27.271</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">27.298</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.55%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-xag"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-eur"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">XAGEUR</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-up-pandats">25.491</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">25.534</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.23%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li><li class="layout-row ng-tns-c2-9">
+
+                                <asset-item class="layout-column full-width centered-content"><div class="asset-item-pandats layout-row">
+    <div class="logo-pandats">
+        <!----><span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-xpt"></span>
+            <span class="flag-pandats flag-icon-pandats flag-icon-pandats-usd"></span>
+        </span>
+
+        <!---->
+    </div>
+    <div class="name-pandats font15-pandats line-height20-pandats">XPTUSD</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down2-pandats">914.33</div>
+    <div class="price-pandats font15-pandats line-height20-pandats asset-down-pandats">917.11</div>
+
+    <div class="daily-change-pandats font15-pandats line-height20-pandats down">-0.17%</div>
+
+    <div class="favorite font22-pandats line-height09-pandats">
+        <i class="icon cmicon-star-empty"></i>
+    </div>
+</div>
+</asset-item>
+
+                                <!---->
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li><li class="layout-row ng-tns-c2-9">
+
+                <div class="layout-column full-width">
+                    <div class="layout-row">
+                        <div class="category-pandats layout-column centered-content">
+                            <div class="layout-row full-width">
+                                <div class="layout-column">
+                                    <i class="icon-pandats cmicon-commodities"></i>
+                                </div>
+
+                                <div class="layout-column name-pandats font18-pandats shrinkable">Commodities</div>
+
+                                <div class="layout-column">
+                                    <i class="icon-pandats icon-action-pandats cmicon-circle-up self-to-end"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="layout-row">
+
+                        <!---->
+                    </div>
+                </div>
+            </li><li class="layout-row ng-tns-c2-9">
+
+                <div class="layout-column full-width">
+                    <div class="layout-row">
+                        <div class="category-pandats layout-column centered-content">
+                            <div class="layout-row full-width">
+                                <div class="layout-column">
+                                    <i class="icon-pandats cmicon-stocks"></i>
+                                </div>
+
+                                <div class="layout-column name-pandats font18-pandats shrinkable">Stocks</div>
+
+                                <div class="layout-column">
+                                    <i class="icon-pandats icon-action-pandats cmicon-circle-up self-to-end"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="layout-row">
+
+                        <!---->
+                    </div>
+                </div>
+            </li><li class="layout-row ng-tns-c2-9">
+
+                <div class="layout-column full-width">
+                    <div class="layout-row">
+                        <div class="category-pandats layout-column centered-content">
+                            <div class="layout-row full-width">
+                                <div class="layout-column">
+                                    <i class="icon-pandats cmicon-indices"></i>
+                                </div>
+
+                                <div class="layout-column name-pandats font18-pandats shrinkable">Indices</div>
+
+                                <div class="layout-column">
+                                    <i class="icon-pandats icon-action-pandats cmicon-circle-up self-to-end"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="layout-row">
+
+                        <!---->
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 516px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 74px;"></div></div></perfect-scrollbar>
+</div>
+</asset-list>
+            </div>
+            <div class="col-right-pandats">
+                <div class="right-center-pandats">
+                    <div class="center-pandats cell-pandats">
+                        <chart-tabs class="ng-tns-c3-10"><ul class="tabs-content-pandats">
+    <li class="tab-item-pandats chartTab">
+        <chart class="ng-tns-c3-10"><wc-panda-chart ng-version="15.2.9"><panda-chart class="layout-row full-height full-width"><link rel="stylesheet" href="https://nfp.pandats.com/panda-chart/panda-chart-theme-white.css" class="ng-star-inserted"><!----><div class="app-container layout-column full-height full-width"><div class="layout-row"><toolbar class="layout-column full-width top-pchart ng-star-inserted"><div class="layout-row content-gap10 just-start ng-star-inserted"><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-46 ng-star-inserted" style="width: fit-content; min-width: fit-content;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-46"><!----><!----><!----><div class="layout-column full-height full-width ng-tns-c3-46 category-viewas-container ng-star-inserted"><div class="layout-row full-width full-height just-center align-center position-relative ng-tns-c3-46"><!----><!----><!----><!----></div></div><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-47 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-47"><div contextcaller="" class="layout-column full-height full-width ng-tns-c3-47 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-height full-width just-center align-center ng-tns-c3-47"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-47 chart-icon-ct-candle_solid tb-chart-icon-ct-candle_solid-pchart tone-light" title="Candle Solid"><!----></div></div><!----></div><!----><!----><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-48 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-48"><!----><!----><!----><!----><div class="layout-column full-height ng-tns-c3-48 category-viewas-list ng-star-inserted"><div class="layout-row full-width full-height align-center ng-tns-c3-48"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light active-pchart ng-star-inserted"> 1M <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 5M <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 15M <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 30M <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 1H <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 4H <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 1D <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 1W <!----><!----></div><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-48 tone-light ng-star-inserted"> 1Mo <!----><!----></div><!----></div></div><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-49 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-49"><!----><!----><div class="layout-column full-height ng-tns-c3-49 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-49 ng-star-inserted"><div class="layout-column tb-no-icon full-width full-height just-center align-center ng-tns-c3-49 tone-light ng-star-inserted" title="Indicators"> Indicators <!----><!----></div><!----><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-50 shrinkable ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-50"><!----><!----><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-51 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-51"><!----><!----><div class="layout-column full-height ng-tns-c3-51 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-51 ng-star-inserted"><div class="layout-column tb-no-icon full-width full-height just-center align-center ng-tns-c3-51 chart-icon-camera tb-icon-pchart tb-chart-icon-camera-pchart tone-light snapshot-category ng-star-inserted" title="Snapshot"><!----></div><!----><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-52 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-52"><!----><!----><div class="layout-column full-height ng-tns-c3-52 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-52 ng-star-inserted"><div class="layout-column tb-no-icon full-width full-height just-center align-center ng-tns-c3-52 chart-icon-fullscreen-alt tb-icon-pchart tb-chart-icon-fullscreen-alt-pchart tone-light ng-star-inserted" title="Full screen"><!----></div><!----><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-53 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-53"><!----><!----><div class="layout-column full-height ng-tns-c3-53 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-53 ng-star-inserted"><div class="layout-column tb-no-icon full-width full-height just-center align-center ng-tns-c3-53 chart-icon-settings tb-icon-pchart tb-chart-icon-settings-pchart tone-light settings-category ng-star-inserted" title="Settings"><!----></div><!----><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><!----></div><!----><!----></toolbar><!----></div><div class="layout-row shrinkable full-height"><div class="layout-column toolbar"><toolbar class="layout-column full-height left-pchart ng-star-inserted"><!----><div class="layout-row ng-star-inserted"><div class="layout-column content-gap10 just-start"><vertical-toolbar-category class="layout-row toolbar-item-pchart ng-tns-c2-54 ng-star-inserted"><div class="layout-column full-height just-center full-width font-14 ng-tns-c2-54"><!----><div class="layout-row full-height ng-tns-c2-54 ng-star-inserted"><div class="layout-column full-width full-height just-center align-center ng-tns-c2-54 chart-icon-cursor tb-icon-pchart tb-chart-icon-cursor-pchart tone-light ng-star-inserted"><!----></div><!----></div><!----></div><!----></vertical-toolbar-category><vertical-toolbar-category class="layout-row toolbar-item-pchart ng-tns-c2-55 ng-star-inserted"><div class="layout-column full-height just-center full-width font-14 ng-tns-c2-55"><div class="layout-row full-height ng-tns-c2-55 ng-star-inserted"><div class="layout-column full-width full-height just-center align-center ng-tns-c2-55 chart-icon-dr-sr tb-icon-pchart tb-chart-icon-dr-sr-pchart tone-light ng-star-inserted" title="Straight Line"><!----></div><!----><!----><div contextcaller="" class="arrow-pchart full-height ng-tns-c2-55 ng-star-inserted"><i class="arrow chart-icon-chevron-right font-18 ng-tns-c2-55"></i></div><!----></div><!----><!----></div><!----></vertical-toolbar-category><vertical-toolbar-category class="layout-row toolbar-item-pchart ng-tns-c2-56 ng-star-inserted"><div class="layout-column full-height just-center full-width font-14 ng-tns-c2-56"><div class="layout-row full-height ng-tns-c2-56 ng-star-inserted"><div class="layout-column full-width full-height just-center align-center ng-tns-c2-56 chart-icon-dr-priceLine tb-icon-pchart tb-chart-icon-dr-priceLine-pchart tone-light ng-star-inserted" title="Price Line"><!----></div><!----><!----><div contextcaller="" class="arrow-pchart full-height ng-tns-c2-56 ng-star-inserted"><i class="arrow chart-icon-chevron-right font-18 ng-tns-c2-56"></i></div><!----></div><!----><!----></div><!----></vertical-toolbar-category><vertical-toolbar-category class="layout-row toolbar-item-pchart ng-tns-c2-57 ng-star-inserted"><div class="layout-column full-height just-center full-width font-14 ng-tns-c2-57"><div class="layout-row full-height ng-tns-c2-57 ng-star-inserted"><div class="layout-column full-width full-height just-center align-center ng-tns-c2-57 chart-icon-dr-rectangle tb-icon-pchart tb-chart-icon-dr-rectangle-pchart tone-light ng-star-inserted" title="Rectangle"><!----></div><!----><!----><div contextcaller="" class="arrow-pchart full-height ng-tns-c2-57 ng-star-inserted"><i class="arrow chart-icon-chevron-right font-18 ng-tns-c2-57"></i></div><!----></div><!----><!----></div><!----></vertical-toolbar-category><vertical-toolbar-category class="layout-row toolbar-item-pchart ng-tns-c2-58 ng-star-inserted"><div class="layout-column full-height just-center full-width font-14 ng-tns-c2-58"><!----><div class="layout-row full-height ng-tns-c2-58 ng-star-inserted"><div class="layout-column full-width full-height just-center align-center ng-tns-c2-58 chart-icon-dr-text tb-icon-pchart tb-chart-icon-dr-text-pchart tone-light ng-star-inserted"><!----></div><!----></div><!----></div><!----></vertical-toolbar-category><vertical-toolbar-category class="layout-row toolbar-item-pchart ng-tns-c2-59 ng-star-inserted"><div class="layout-column full-height just-center full-width font-14 ng-tns-c2-59"><div class="layout-row full-height ng-tns-c2-59 ng-star-inserted"><div class="layout-column full-width full-height just-center align-center ng-tns-c2-59 chart-icon-dr-remove tb-icon-pchart tb-chart-icon-dr-remove-pchart tone-light ng-star-inserted" title="Remove all"><!----></div><!----><!----><div contextcaller="" class="arrow-pchart full-height ng-tns-c2-59 ng-star-inserted"><i class="arrow chart-icon-chevron-right font-18 ng-tns-c2-59"></i></div><!----></div><!----><!----></div><!----></vertical-toolbar-category><!----></div></div><!----></toolbar><!----></div><div class="layout-column shrinkable position-relative"><chart-instance class="layout-column full-width full-height"><spinner><div class="backdrop" hidden=""></div><div class="spinner" hidden=""><svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve"><rect x="20" y="50" width="8" height="20" fill="#fff"><animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite"></animateTransform></rect><rect x="30" y="50" width="8" height="20" fill="#fff"><animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite"></animateTransform></rect><rect x="40" y="50" width="8" height="20" fill="#fff"><animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite"></animateTransform></rect></svg></div></spinner><div tooltip="" class="layout-row full-height full-width" id="chart-instance-118556"><div tabindex="1" class="chart-pane" style="user-select: none; -webkit-tap-highlight-color: transparent; position: relative; outline: none; border-style: none; width: 100%; cursor: crosshair;"><div class="indicator-pane candle_pane" style="margin: 0px; padding: 0px; position: relative; overflow: hidden; width: 100%; will-change: height; transform: translate3d(0px, 0px, 0px); height: 492px;"><div style="top: 0px; margin: 0px; padding: 0px; position: absolute; overflow: hidden; left: 0px; width: 14px; height: 492px;"><canvas height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 492px; width: 14px;" width="300"></canvas><canvas height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 492px; width: 14px;" width="300"></canvas><canvas height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 492px; width: 14px;" width="300"></canvas><canvas class="lower-canvas" width="300" height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; width: 14px; height: 492px;"></canvas></div><div style="top: 0px; margin: 0px; padding: 0px; position: absolute; overflow: hidden; left: -12px; width: 63px; height: 492px;"><canvas height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 492px; width: 63px;" width="63"></canvas><canvas height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 492px; width: 63px;" width="63"></canvas><canvas class="lower-canvas" width="63" height="492" style="position: absolute; top: 0px; left: 0px; z-index: 2; width: 63px; height: 492px;" dir="ltr"></canvas></div></div><div class="xaxis-pane" style="margin: 0px; padding: 0px; position: relative; overflow: hidden; width: 100%; height: 26px;"><div style="top: 0px; margin: 0px; padding: 0px; position: absolute; overflow: hidden; left: 0px; width: 14px; height: 26px;"><canvas height="26" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 26px; width: 14px;" width="300"></canvas><canvas height="26" style="position: absolute; top: 0px; left: 0px; z-index: 2; height: 26px; width: 14px;" width="300"></canvas></div></div></div></div><toolbar-wrapper class="toolbar-border" style="visibility: hidden;"><div class="layout-row full-height align-center"><div class="layout-column drag-pad"><i class="chart-icon-more-vertical font-20"></i></div><div class="layout-column full-width"><!----></div></div></toolbar-wrapper><trade-event-wrapper class="ng-tns-c38-45"><!----></trade-event-wrapper></chart-instance><!----></div></div><div class="float-toolbar ng-star-inserted"><toolbar class="layout-column"><div class="layout-row content-gap10 just-start ng-star-inserted"><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-60 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-60"><!----><!----><div class="layout-column full-height ng-tns-c3-60 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-60 ng-star-inserted"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-60 chart-icon-skip-back ng-star-inserted" title="Scroll Start"><!----></div><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-61 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-61"><!----><!----><div class="layout-column full-height ng-tns-c3-61 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-61 ng-star-inserted"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-61 chart-icon-chevrons-left ng-star-inserted" title="Scroll Left"><!----></div><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-62 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-62"><!----><!----><div class="layout-column full-height ng-tns-c3-62 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-62 ng-star-inserted"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-62 chart-icon-chevrons-right ng-star-inserted" title="Scroll Right"><!----></div><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-63 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-63"><!----><!----><div class="layout-column full-height ng-tns-c3-63 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-63 ng-star-inserted"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-63 chart-icon-skip-forward ng-star-inserted" title="Scroll End"><!----></div><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-64 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-64"><!----><!----><div class="layout-column full-height ng-tns-c3-64 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-64 ng-star-inserted"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-64 chart-icon-zoom-in ng-star-inserted" title="Zoom In"><!----></div><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><horizontal-toolbar-category class="layout-column toolbar-item-pchart ng-tns-c3-65 ng-star-inserted" style="width: auto; min-width: 36px;"><div class="layout-row full-height full-width font-12 font-medium ng-tns-c3-65"><!----><!----><div class="layout-column full-height ng-tns-c3-65 category-viewas-dropdown ng-star-inserted"><div class="layout-row full-width full-height just-center align-center ng-tns-c3-65 ng-star-inserted"><div class="layout-column tb-icon-pchart just-center align-center ng-tns-c3-65 chart-icon-zoom-out ng-star-inserted" title="Zoom Out"><!----></div><!----><!----></div><!----></div><!----><!----><!----></div><!----></horizontal-toolbar-category><!----></div><!----><!----></toolbar></div><!----></div><popups-pts class="ng-tns-c1-44"><!----></popups-pts><context-pts class="layout-row"><!----></context-pts></panda-chart></wc-panda-chart>
+</chart>
+    </li>
+</ul>
+</chart-tabs>
+                    </div>
+                    <div class="right-pandats cell-pandats">
+                        <div class="trades-pandats">
+                            <invest class="invest-wrapper ng-tns-c4-11"><perfect-scrollbar class="container-pandats ps-container ps-theme-default" data-ps-id="7b8d3c5a-e576-34fd-c58c-e88d49846677"><div class="ps-content">
+    <form class="layout-column ng-tns-c4-11 ng-untouched ng-pristine ng-valid" novalidate="">
+        <div class="volume-wrapper layout-row">
+            <div class="layout-column full-width">
+                <div class="component-title layout-row between-pandats just-start">
+                    <div class="amount-title-pandats">EURZAR</div>
+                </div>
+                <div class="layout-row form-group-pandats">
+                    <input class="full-width font14-pandats ng-untouched ng-pristine ng-valid" autocomplete="off" maxlength="5" name="value" type="text">
+                    <custom-select class="ng-tns-c4-11 ng-untouched ng-pristine ng-valid" name="amountStep"><!----><div class="frx-dropdown-pandats layout-row just-end">
+    <div class="frx-dropbtn-pandats layout-column centered-content full-width">
+        <!---->
+        <!----><span class="frx-currentvalue-pandats">
+            0.1
+        </span>
+    </div>
+    <div class="frx-dropdown-content-pandats date-picker-pandats pfdin-text-universal-pandats dropdown-hide-pandats">
+        <perfect-scrollbar class="scroll-container-pandats ps-container ps-theme-default ps-active-y" data-ps-id="79ab8260-9dda-c448-3cf2-3bf6f26c2eb4"><div class="ps-content">
+            <div class="wrap-list-pandats" style="height: 136px;">
+                   <!----><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.01</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.02</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.03</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.04</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.05</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.06</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.07</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.08</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">0.09</span>
+                   </span><span class="item-pandats active-pandats">
+			<!---->
+			<span class="itemLabel">0.1</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">1</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">2</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">3</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">4</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">5</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">6</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">7</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">8</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">9</span>
+                   </span><span class="item-pandats">
+			<!---->
+			<span class="itemLabel">10</span>
+                   </span>
+            </div>
+        </div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 216px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 83px;"></div></div></perfect-scrollbar>
+    </div>
+</div>
+
+
+<!---->
+</custom-select>
+                </div>
+                
+                    
+                    
+                
+                <div class="layout-row between-pandats title-val-pair">
+                    <div class="ng-tns-c4-11">Pips Value:</div>
+                    <div class="ng-tns-c4-11">$0.53</div>
+                </div>
+                <div class="layout-row between-pandats title-val-pair">
+                    <div class="ng-tns-c4-11">Required Margin:</div>
+                    <div class="ng-tns-c4-11">$1,069.37</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout-row between-pandats btn-panel-pandats">
+            <div class="btn-pandats sell-pandats layout-column">
+
+                <div class="layout-row full-width just-center content-pushed10">
+                    <i class="icon-pandats cmicon-sell_icon"></i>
+                    <div class="btn-title-pandats font20-pandats line-height16-pandats">
+                        Sell
+                    </div>
+                </div>
+                <!----><div class="btn-value-pandats layout-row font20-pandats make-bold full-width just-center ng-tns-c4-11">
+                    20.1118
+                </div>
+            </div>
+            <div class="btn-pandats buy-pandats layout-column">
+                <div class="layout-row full-width just-center content-pushed10">
+                    <i class="icon-pandats cmicon-buy_icon"></i>
+                    <div class="btn-title-pandats font20-pandats line-height16-pandats">
+                        Buy
+                    </div>
+                </div>
+                <!----><div class="btn-value-pandats layout-row font20-pandats make-bold full-width just-center ng-tns-c4-11">
+                    20.1191
+                </div>
+            </div>
+        </div>
+
+        <div class="tr-row-pandats">
+            <button class="invest-pandats font20-pandats" disabled="">Trade</button>
+        </div>
+
+        <div class="layout-row">
+            <div class="rate-is-pandats layout-column full-width">
+                <div class="advanced-checkbox rate-is layout-row">
+                    <input class="ng-tns-c4-11" autocomplete="off" id="rate" type="checkbox" disabled="">
+
+                    <label class="font12-pandats full-height line-height16-pandats inactive-pandats" for="rate">Open trade when rate is</label>
+                </div>
+                <!---->
+            </div>
+        </div>
+
+        <div class="advanced-pandats font12-pandats">
+            <div class="hidePanel-pandats layout-column">
+                <div class="advanced-checkbox-wrapper layout-row content-pushed22">
+                    <div class="advanced-checkbox semi-width full-height">
+                        <input class="ng-tns-c4-11" autocomplete="off" id="st-ls" type="checkbox" disabled="">
+                        <label class="full-height line-height16-pandats inactive-pandats" for="st-ls">Stop Loss</label>
+                    </div>
+
+                    <div class="advanced-checkbox semi-width full-height">
+                        <input class="ng-tns-c4-11" autocomplete="off" id="tk-pr-pandats" type="checkbox" disabled="">
+                        <label class="tp-pandats full-height line-height16-pandats inactive-pandats" for="tk-pr-pandats">
+                            Take Profit
+                        </label>
+                    </div>
+                </div>
+                <div class="between-pandats layout-row content-pushed22">
+                    <div class="layout-column semi-width">
+                        <div class="layout-row content-pushed06">
+                            <div class="layout-column centered-content">Pips</div>
+                            <div class="layout-column centered-content">
+                                <custom-input class="ng-tns-c4-11 ng-untouched ng-pristine" maxlength="7" name="stopLossPips"><div class="disabledGroup">
+    <input class="custom-input-field-pandats ng-untouched ng-pristine ng-valid" type="text" autocomplete="off" maxlength="7">
+
+    <!----><div class="btnGroup">
+        <button class="custom-input-pandats">+
+        </button>
+        <button class="custom-input-pandats">-
+        </button>
+    </div>
+</div></custom-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layout-column semi-width">
+                        <div class="layout-row content-pushed06">
+                            <div class="layout-column centered-content">Pips</div>
+                            <div class="layout-column centered-content">
+                                <custom-input class="ng-tns-c4-11 ng-untouched ng-pristine" maxlength="7" name="takeProfitPips"><div class="disabledGroup">
+    <input class="custom-input-field-pandats ng-untouched ng-pristine ng-valid" type="text" autocomplete="off" maxlength="7">
+
+    <!----><div class="btnGroup">
+        <button class="custom-input-pandats">+
+        </button>
+        <button class="custom-input-pandats">-
+        </button>
+    </div>
+</div></custom-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="between-pandats layout-row content-pushed22">
+                    <div class="layout-column semi-width">
+                        <div class="layout-row content-pushed06">
+                            <div class="layout-column centered-content">Price</div>
+                            <div class="layout-column centered-content">
+                                <custom-input class="ng-tns-c4-11 ng-untouched ng-pristine" maxlength="8" name="stopLossRate"><div class="disabledGroup">
+    <input class="custom-input-field-pandats ng-untouched ng-pristine ng-valid" type="text" autocomplete="off" maxlength="8">
+
+    <!----><div class="btnGroup">
+        <button class="custom-input-pandats">+
+        </button>
+        <button class="custom-input-pandats">-
+        </button>
+    </div>
+</div></custom-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layout-column semi-width">
+                        <div class="layout-row content-pushed06">
+                            <div class="layout-column centered-content">Price</div>
+                            <div class="layout-column centered-content">
+                                <custom-input class="ng-tns-c4-11 ng-untouched ng-pristine" maxlength="8" name="takeProfitRate"><div class="disabledGroup">
+    <input class="custom-input-field-pandats ng-untouched ng-pristine ng-valid" type="text" autocomplete="off" maxlength="8">
+
+    <!----><div class="btnGroup">
+        <button class="custom-input-pandats">+
+        </button>
+        <button class="custom-input-pandats">-
+        </button>
+    </div>
+</div></custom-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="between-pandats layout-row content-pushed22">
+                    <div class="layout-column semi-width">
+                        <div class="layout-row content-pushed06">
+                            <div class="layout-column centered-content">Value</div>
+                            <div class="layout-column centered-content full-width disabled-pandats">
+                                <!---->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="layout-column semi-width">
+                        <div class="layout-row content-pushed06">
+                            <div class="layout-column centered-content">Value</div>
+                            <div class="layout-column centered-content full-width disabled-pandats">
+                                <!---->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!---->
+
+        <!---->
+</form>
+</div>
+<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></perfect-scrollbar>
+
+<modal class="ng-tns-c4-11 ng-tns-c7-12"><!---->
+</modal>
+</invest>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
+    </div>
+    <modal class="ng-tns-c7-0"><!---->
+</modal>
+</div>
+
+
+</panda-forex-trading-platform>
+    </div>
+</div>
+<!-- chart production only -->
+<script src="https://nfp.pandats.com/panda-chart/panda-chart-bundle.js"></script>
+<link href="https://nfp.pandats.com/panda-chart/styles.css" rel="stylesheet">
+<!-- end chart -->
+<!-- <script src="https://nfp.pandats.com/brandname/loader.js"></script> -->
+<script src="loader.js"></script>
+
+
+<link type="text/css" rel="stylesheet" href="./css/index5641.css">
+<script type="text/javascript" src="vendor.js?v=50418b3"></script>
+<script type="text/javascript" src="common.50418b3.js"></script>
+<script type="text/javascript" src="forexInit.50418b3.js"></script>
+<script type="text/javascript" src="forexTradingPlatform.50418b3.js"></script>
+<script type="text/javascript" src="forexLogin.50418b3.js"></script>
+<script type="text/javascript" src="forexAccounts.50418b3.js"></script>
+<script type="text/javascript" src="forexAccountStatus.50418b3.js"></script>
+<script type="text/javascript" src="forexMarketAnalysis.50418b3.js"></script>
+<script type="text/javascript" src="forexClock.50418b3.js"></script>
+<script type="text/javascript" src="forexLang.50418b3.js"></script>
+<script type="text/javascript" src="forexLogo.50418b3.js"></script>
+</body>
+</html>
